@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Alex;
+    src: url("../fonts/AlexBrush-Regular.ttf");
+}
+
+* {
+    font-family: Alex, Arial, cursive;
+}
