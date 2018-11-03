@@ -3,6 +3,31 @@ var gulp = require("gulp"),
     pref = require('gulp-autoprefixer'),
     watch = require('gulp-watch');
 
+// web server
+var browserSync = require("browser-sync");
+var staticServer = browserSync.create();
+var config = {
+    server: {
+        baseDir: "./build"
+    },
+    tunnel: false,
+    host: "localhost",
+    port: 9000,
+    injectChanges: false,
+    logPrefix: "BrowserSync Log"
+};
+
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./src"
+        }
+    });
+});
+
+
+// end of web server
+
 gulp.task('copyTask', function () {
     return gulp.src('src/**/.')
         .pipe(gulp.dest('app'))
@@ -44,4 +69,8 @@ gulp.task('watchTask', () => {
             }))
             .pipe(gulp.dest('app'))
     });
+});
+
+gulp.task('watch', function () {
+    gulp.watch('src/**/*.css', ['autoprefAndConcatTask']);
 });
